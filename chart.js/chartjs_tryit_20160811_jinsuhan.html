@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chart js example</title>
+
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.js"></script>
+
+    <style media="screen">
+      .canvas{width: 300px; float: left;}
+    </style>
+  </head>
+
+  <body>
+    <div class="canvas"><canvas id="chart01" width="300" height="300"></canvas></div>
+    <div class="canvas"><canvas id="chart02" width="300" height="300"></canvas></div>
+    <div class="canvas"><canvas id="chart03" width="300" height="300"></canvas></div>
+    <div class="canvas"><canvas id="chart04" width="300" height="300"></canvas></div>
+
+  <script>
+
+  // line chart - 가장 기본적인 형태의 chart
+  var data = {
+    type: "line",
+    data: {
+    labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월"],
+    datasets: [
+        {
+          label: "사용 횟수",
+          data: [65, 59, 80, 81, 56, 55, 40],
+          backgroundColor: 'rgba(0,0,222,0.1)'
+        }
+      ]
+    }
+  };
+  var ctx = $('#chart01').get(0).getContext('2d');
+  var myNewChart = new Chart(ctx, data);
+// -------------------------------------------------------------------------------
+
+
+// bar chart
+      var data2 = {
+        type: "bar",
+        data: {
+          labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
+          datasets: [{
+              label: "참여 횟수",
+              data: [65, 59, 80, 81, 66, 75],
+              backgroundColor: [
+                "red",
+                "blue",
+                "yellow",
+                "green",
+                "purple",
+                "skyblue"
+              ]}
+          ],
+          options: {
+            animation: true
+          }
+        }
+      };
+      var ctx2 = $('#chart02').get(0).getContext('2d');
+      var myBarChart = new Chart(ctx2,data2);
+      // -------------------------------------------------------------------------------
+
+
+      // radar chart
+      var data3 = {
+        type:"radar",
+        data :{
+        labels : ["식사", "마시기", "잠자기", "코딩", "놀기", "달리기", "기타"],
+        datasets : [{
+          label: "참가자 1",
+          data : [65, 59, 90, 81, 56, 55, 52],
+          backgroundColor: 'rgba(22,0,44,0.4)'
+        }, {
+          label: "참가자 2",
+          data : [28, 48, 40, 19, 96, 27, 100],
+          backgroundColor: 'rgba(22,55,21,0.4)'
+        }]
+      }
+     };
+     var ctx3 = $("#chart03").get(0).getContext("2d");
+     var myRaderChart = new Chart(ctx3,data3);
+     // -------------------------------------------------------------------------------
+
+
+     // pie chart
+    var data4 = {
+      type : "pie",
+      data: {
+       labels: ["빨간색","파란색","노란색"],
+       datasets: [{
+          data: [300, 50, 100],
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56"
+          ]}
+        ]
+      },
+      options: {
+        hover:{
+          mode: "x-axis"
+        },
+        tooltips:{
+          enabled: false
+        },
+        legend: {
+          position: "bottom"
+        },
+        animation: {
+          onProgress: function () {
+
+            //해당되는 영역의 중앙 위치 값을 계산하여 텍스트를 삽입.
+
+            var self = this, chartInstance = this.chart, ctx = chartInstance.ctx;
+
+            ctx.font = '15px Arial ';
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#ffffff";
+
+            Chart.helpers.each(self.data.datasets.forEach(function (dataset, datasetIndex) {
+              var meta = self.getDatasetMeta(datasetIndex),
+                total = 0,
+                labelxy = [],
+                offset = Math.PI / 2,
+                radius,
+                centerx,
+                centery,
+                lastend = 0;
+
+              for (var val of dataset.data) { total += val; }
+
+              Chart.helpers.each(meta.data.forEach( function (element, index) {
+                radius = 0.9 * element._model.outerRadius - element._model.innerRadius;
+                centerx = element._model.x;
+                centery = element._model.y;
+                var thispart = dataset.data[index],
+                  arcsector = Math.PI * (2 * thispart / total);
+                  if (element.hasValue() && dataset.data[index] > 0) {
+                    labelxy.push(lastend + arcsector / 2 + Math.PI + offset);
+                  }
+                  else {
+                    labelxy.push(-1);
+                  }
+                    lastend += arcsector;
+                }), self)
+
+                var lradius = radius * 3 / 4;
+                for (var idx in labelxy) {
+                  if (labelxy[idx] === -1) continue;
+                  var langle = labelxy[idx],
+                    dx = centerx + lradius * Math.cos(langle),
+                    dy = centery + lradius * Math.sin(langle),
+                    val = Math.round(dataset.data[idx] / total * 100);
+
+                    //텍스트, 위치 설정
+                  ctx.fillText(data4.data.labels[idx], dx, dy);
+                }
+            }), self);
+          }
+        }
+      }
+    };
+  var ctx4 = $("#chart04").get(0).getContext("2d");
+  var myPieChart = new Chart(ctx4,data4);
+
+  </script>
+  </body>
+</html>

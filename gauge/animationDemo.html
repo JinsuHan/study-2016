@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>animation Demo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <!-- gauge 01 -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.2/justgage.min.js"></script>
+
+      <!--  gauge 02-->
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/jquery.jqplot.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqPlot/1.0.8/plugins/jqplot.meterGaugeRenderer.min.js"></script>
+
+      <!--  gauge 03-->
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!--  -->
+
+<!--  bar 01-->
+
+  	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+
+    <style>
+      html,body{width: 100%; height: 100%; margin: 0px;}
+      .half{width: 100%; height: 50%;}
+      .item{width: 300px; height: 100%; float: left;}
+
+
+
+      /*bar 01*/
+    	#xaxis .domain {
+    		fill:none;
+    		stroke:#000;
+    	}
+    	#xaxis text, #yaxis text {
+    		font-size: 12px;
+    	}
+      #bar01 svg{
+        width: 210px;
+        height: 75px;
+        border: 2px solid #d3d3d3;
+      }
+
+
+      /*bar 02*/
+
+      .skillbar {
+  position:relative;
+  display:block;
+  margin-bottom:15px;
+  width:100%;
+  background:#eee;
+  height:35px;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  -webkit-transition:0.4s linear;
+  -moz-transition:0.4s linear;
+  -ms-transition:0.4s linear;
+  -o-transition:0.4s linear;
+  transition:0.4s linear;
+  -webkit-transition-property:width, background-color;
+  -moz-transition-property:width, background-color;
+  -ms-transition-property:width, background-color;
+  -o-transition-property:width, background-color;
+  transition-property:width, background-color;
+  }
+
+  .skillbar-title {
+  position:absolute;
+  top:0;
+  left:0;
+  width:40px;
+  font-weight:bold;
+  font-size:13px;
+  color:#ffffff;
+  background:#6adcfa;
+  -webkit-border-top-left-radius:3px;
+  -webkit-border-bottom-left-radius:4px;
+  -moz-border-radius-topleft:3px;
+  -moz-border-radius-bottomleft:3px;
+  border-top-left-radius:3px;
+  border-bottom-left-radius:3px;
+  }
+
+  .skillbar-title span {
+  display:block;
+  background:rgba(0, 0, 0, 0.1);
+  padding:0 7px;
+  height:35px;
+  line-height:35px;
+  -webkit-border-top-left-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -moz-border-radius-topleft:3px;
+  -moz-border-radius-bottomleft:3px;
+  border-top-left-radius:3px;
+  border-bottom-left-radius:3px;
+  }
+
+  .skillbar-bar {
+  height:35px;
+  width:0px;
+  background:#6adcfa;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  }
+
+  .skill-bar-percent {
+  position:absolute;
+  right:10px;
+  top:0;
+  font-size:11px;
+  height:35px;
+  line-height:35px;
+  color:#ffffff;
+  color:rgba(0, 0, 0, 0.4);
+  }
+
+  /* bar 03*/
+
+  .bar-main-container {
+  width: 240px;
+  height: 50px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-family: sans-serif;
+  font-weight: normal;
+  font-size: 0.8em;
+  color: #FFF;
+}
+
+.wrap { padding: 8px; }
+
+.bar-percentage {
+  float: left;
+  background: rgba(0,0,0,0.13);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  text-indent: 15px;
+  border-radius: 4px;
+  padding: 9px 0px;
+  width: 18%;
+  height: 18px;
+}
+
+.bar-container {
+  float: right;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  height: 15px;
+  background: rgba(0,0,0,0.13);
+  width: 78%;
+  margin: 9px 0px;
+  overflow: hidden;
+}
+
+.bar {
+  float: left;
+  background: #FFF;
+  height: 100%;
+  -webkit-border-radius: 10px 0px 0px 10px;
+  -moz-border-radius: 10px 0px 0px 10px;
+  border-radius: 10px 0px 0px 10px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=100);
+  -moz-opacity: 1;
+  -khtml-opacity: 1;
+  opacity: 1;
+}
+
+/* COLORS */
+.azure   { background: #38B1CC; }
+.emerald { background: #2CB299; }
+.violet  { background: #8E5D9F; }
+.yellow  { background: #EFC32F; }
+.red     { background: #E44C41; }
+    </style>
+  </head>
+  <body>
+    <div id="gauge" class="half">
+
+    </div>
+    <div id="bar" class="half">
+
+    </div>
+<script>
+$(document).ready(function() {
+  var random = Math.floor(Math.random() * 10)+1;
+
+
+
+    // gauge 02
+  $("#gauge").append("<div id='gauge02' class='item'></div>");
+  gauge02('gauge02', random);
+
+    // gauge 03
+  $("#gauge").append("<div id='gauge03' class='item'></div>");
+  google.charts.load('current', {'packages':['gauge']});
+  google.charts.setOnLoadCallback(gauge03);
+
+    // gauge 04
+  $("#gauge").append("<div id='gauge04' class='item'></div>");
+  $("#gauge04").append('<div class="pie" data-actual="'+random+'" data-total="10" data-caption="등급"></div>');
+  $('.pie').miniPie({pieWidth: 10});
+
+
+
+//bar 01
+$("#bar").append("<div id='bar01' class='item'></div>");
+bar01("bar01", random);
+
+// bar 02
+$("#bar").append("<div id='bar02' class='item'></div>");
+bar02("bar02", random);
+
+// bar 03
+$("#bar").append("<div id='bar03' class='item'></div>");
+bar03("bar03", random);
+
+
+  // gauge 01
+  // d3 로 제작한 gauge01 과 bar01 이 뭔가 충돌 하여 bar01 의 bar가 표시되지 않음
+  //그래서 일단 gauge01을 나중에 호출 하여 표시.
+  $("#gauge").append("<div id='gauge01' class='item'></div>");
+  gauge01('gauge01', random);
+
+
+  function gauge01(id, data){
+    //http://justgage.com/
+    //단순히 호출하고 데이터값만 입력하면 되서 간단하게 사용 가능
+    //세밀한 커스터마이즈는 불가능 하다
+    var gauge = new JustGage({
+      id: id,
+      reverse: true,
+      value: data,
+      min: 1,
+      max: 10,
+  percents: true,
+  ranges: [{
+    color : "#4CAF50",
+    lo : 0,
+    hi : 40
+  },{
+    color : "#FFEB3B",
+    lo : 41,
+    hi : 60
+  },{
+    color : "#B71C1C",
+    lo : 61,
+    hi : 100
+  }],
+      title: "등급"
+    });
+  }
+
+  function gauge02(id, data){
+    //  http://coursesweb.net/jquery/jqplot-charts_jp
+    // meter gauge chart 그대로 사용
+    // 사용법이 단순, 호출하고 데이터 입력만 하면 된다
+
+    var chart_data = [ [data] ];
+    var chart_opt = {
+      title:'등급',
+      seriesDefaults:{
+        renderer:$.jqplot.MeterGaugeRenderer,
+        rendererOptions: {
+          min: 1,
+          max: 10,
+          intervals:[4, 6, 8, 10],
+          intervalColors:['#66cc66', '#93b75f', '#E7E658', '#cc6666']
+        }
+      }
+    };
+    $.jqplot(id, chart_data, chart_opt);
+  }
+
+  function gauge03() {
+    //https://developers.google.com/chart/interactive/docs/gallery/gauge
+    //구글 게이지 차트
+    //커스텀은 불가능하고  gauge03 호출시 파라미터를 넘길수가 없다
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['등급', random]
+        ]);
+        var options = {
+          max: 10, min: 1,
+          width: 200, height: 200,
+          redFrom: 8, redTo: 10,
+          yellowFrom:6, yellowTo: 8,
+          minorTicks: 2
+        };
+        var chart = new google.visualization.Gauge(document.getElementById('gauge03'));
+        chart.draw(data, options);
+
+  }
+
+});
+
+// gauge04
+// http://jsfiddle.net/q6z59s9c/
+// 해당 jquery plugin 그대로 사용
+(function($) {
+    $.fn.extend({
+        miniPie: function(options) {
+            var defaults = {
+                width: '200px',
+                height: '200px',
+                origin: 270,
+                radius: 65,
+                x: 95,
+                y: 95,
+                markers: 10,
+                markerWidth: 2,
+                markerColor: '#aaa',
+                markerCap: 'square',
+                markerGap: 10,
+                pieWidth: 5,
+                pieBgColor: '#eee',
+                pieColor: '#c00',
+                pieCap: 'round',
+                showPercent: true,
+                showActual: false,
+                valueFont: 'normal 20px century gothic',
+                valueFontColor: '#999',
+                captionFont: 'normal 14px century gothic',
+                captionFontColor: '#999',
+                precision: 0
+            };
+            var opt = $.extend(defaults, options);
+
+            return this.each(function() {
+                var cr = function(d) {
+                    return d * (Math.PI / 180);
+                },
+                    cv = document.createElement("canvas"),
+                    p = ($(this).data("actual") / $(this).data("total")) * 100,
+                    s = cr(p * 3.6),
+                    o = cr(opt.origin),
+                    c = cv.getContext('2d');
+
+                cv.setAttribute("width", opt.width);
+                cv.setAttribute("height", opt.height);
+
+                c.lineWidth = opt.markerWidth;
+                c.lineCap = opt.markerCap;
+                for (i = 0; i < opt.markers; i++) {
+                    var l = cr((360 / opt.markers) * i);
+                    c.beginPath();
+                    c.arc(opt.x, opt.y, opt.radius + (opt.markerGap), o + l, o + (l + 0.001));
+                    c.strokeStyle = opt.markerColor;
+                    c.stroke();
+                    c.closePath();
+                }
+
+                c.lineWidth = opt.pieWidth;
+                c.lineCap = opt.pieCap;
+                c.beginPath();
+                c.arc(opt.x, opt.y, opt.radius, 0, 10);
+                c.strokeStyle = opt.pieBgColor;
+                c.stroke();
+                c.closePath();
+
+                c.beginPath();
+                c.arc(opt.x, opt.y, opt.radius, o, o + s);
+                c.strokeStyle = opt.pieColor;
+                c.stroke();
+                c.closePath();
+
+                if (opt.showPercent) {
+                    c.beginPath();
+                    c.fillStyle = opt.valueFontColor;
+                    c.textAlign = "center";
+                    c.textBaseline = "middle";
+                    c.font = opt.valueFont;
+                    c.fillText(p.toFixed(opt.precision) /10, opt.x, opt.y);
+                    c.closePath();
+                }
+
+                if (opt.showActual) {
+                    c.beginPath();
+                    c.fillStyle = opt.valueFontColor;
+                    c.textAlign = "center";
+                    c.textBaseline = "middle";
+                    c.font = opt.valueFont;
+                    c.fillText($(this).data("actual"), opt.x, opt.y);
+                    c.closePath();
+                }
+
+                if ($(this).data("caption")) {
+                    c.beginPath();
+                    c.fillStyle = opt.captionFontColor;
+                    c.textAlign = "center";
+                    c.textBaseline = "middle";
+                    c.font = opt.captionFont;
+                    c.fillText($(this).data("caption"), opt.x, (opt.y + (opt.radius))+20);
+                    c.closePath();
+                }
+
+                $(this).append(cv);
+            });
+        }
+    });
+})(jQuery);
+
+
+function bar01(id, data){
+  // http://bl.ocks.org/kiranml1/6872226
+  //d3.js 사용
+  // horizontal bar chart 에 하나의 데이터만 줘서 만듬
+
+  var categories= ['','등급'];
+  var gaugeData = [data];
+  var colors = ['#0000b4'];
+  var barTarget = id;
+
+  var grid = d3.range(11).map(function(i){
+    return {'x1':0,'y1':0,'x2':0,'y2':48};
+  });
+
+  var tickVals = grid.map(function(d,i){
+    if(i>0){ return i*1; }
+    else if(i===0){ return "10";}
+  });
+
+  var xscale = d3.scale.linear()
+          .domain([0,10])
+          .range([0,165]);
+
+  var yscale = d3.scale.linear()
+          .domain([0,categories.length])
+          .range([0,48]);
+
+  var colorScale = d3.scale.quantize()
+          .domain([0,categories.length])
+          .range(colors);
+
+  var canvas = d3.select('#'+barTarget)
+          .append('svg')
+          .attr({'width':205,'height':70});
+
+  var grids = canvas.append('g')
+            .attr('id','grid')
+            .attr('transform','translate(30,10)')
+            .selectAll('line')
+            .data(grid)
+            .enter()
+            .append('line')
+            .attr({'x1':function(d,i){ return i*16.5; },
+               'y1':function(d){ return d.y1; },
+               'x2':function(d,i){ return i*16.5; },
+               'y2':function(d){ return d.y2; },
+            })
+            .style({'stroke':'#adadad','stroke-width':'1px'});
+
+  var	xAxis = d3.svg.axis();
+    xAxis
+      .orient('bottom')
+      .scale(xscale)
+      .tickValues(tickVals);
+
+  var	yAxis = d3.svg.axis();
+    yAxis
+      .orient('left')
+      .scale(yscale)
+      .tickSize(2)
+      .tickFormat(function(d,i){ return categories[i]; })
+      .tickValues(d3.range(17));
+
+  var y_xis = canvas.append('g')
+            .attr("transform", "translate(30,10)")
+            .attr('id','yaxis')
+            .call(yAxis);
+
+  var x_xis = canvas.append('g')
+            .attr("transform", "translate(30,48)")
+            .attr('id','xaxis')
+            .call(xAxis);
+
+  var chart = canvas.append('g')
+            .attr("transform", "translate(30,0)")
+            .attr('id','bars')
+            .selectAll('rect')
+            .data(gaugeData)
+            .enter()
+            .append('rect')
+            .attr('height',20)
+            .attr({'x':0,'y':function(d,i){ return yscale(i)+20; }})
+            .style('fill',function(d,i){ return colorScale(i); })
+            .attr('width',function(d){ return 0; });
+
+  var transit = d3.select("svg").selectAll("rect")
+              .data(gaugeData)
+              .transition()
+              .duration(1000)
+              .attr("width", function(d) {return xscale(d); });
+
+  var transitext = d3.select('#bars')
+            .selectAll('text')
+            .data(gaugeData)
+            .enter()
+            .append('text')
+            .attr({'x':function(d) {return xscale(d)-20; },'y':function(d,i){ return yscale(i)+35; }})
+            .text(function(d){ return d; }).style({'fill':'#fff','font-size':'15px','font-weight':'bold'});
+
+}
+
+
+function bar02(id, data){
+  //https://codepen.io/tamak/pen/hzEer
+  // css 와 약간의 js 로 이루어짐
+  // data-percent 만큼 width를 증가시켜서 표시
+
+  var categories= '등급';
+  var gaugeData = data * 10;
+  var colorTitle = '#80CBC4';
+  var colorBar = '#B2DFDB';
+  var barTarget = id;
+
+  var target = $("#"+barTarget);
+//d35400 , e67e22
+  target.append(`
+    <div class="skillbar clearfix " data-percent="${gaugeData+"%"}">
+	   <div class="skillbar-title" style="background: ${colorTitle};"><span>${categories}</span></div>
+  	<div class="skillbar-bar" style="background: ${colorBar};"></div>
+	   <div class="skill-bar-percent">${data}</div>
+    </div> `);
+
+  jQuery('.skillbar').each(function(){
+    jQuery(this).find('.skillbar-bar').animate({
+      width:jQuery(this).attr('data-percent')
+    },1000);
+  });
+}
+
+
+function bar03(id, data){
+  //http://codepen.io/rodrigov/pen/asLzn
+  // bar02 와 비슷
+  //html 에서 선언한 내용만큼 width 를 증가시켜서 표시
+
+  var categories= '등급';
+  var gaugeData = data * 10;
+  var colorTitle = '#80CBC4';
+  var colorBar = '#B2DFDB';
+  var barTarget = id;
+
+  var target = $("#"+barTarget);
+//d35400 , e67e22
+  target.append(`
+    <div id="bar-1" class="bar-main-container violet">
+    <div class="wrap">
+      <div class="bar-percentage" data-percentage="${gaugeData}"></div>
+      <div class="bar-container">
+        <div class="bar"></div>
+      </div>
+    </div>
+  </div> `);
+    $('.bar-percentage[data-percentage]').each(function () {
+      var progress = $(this);
+      var percentage = Math.ceil($(this).attr('data-percentage'));
+      $({countNum: 0}).animate({countNum: percentage}, {
+        duration: 1000,
+        easing:'linear',
+        step: function() {
+          // What todo on every count
+          var pct = Math.floor(this.countNum);
+          progress.text(Math.round(pct / 10)) && progress.siblings().children().css('width',pct * 1.8);
+        }
+      });
+    });
+}
+
+
+</script>
+  </body>
+</html>

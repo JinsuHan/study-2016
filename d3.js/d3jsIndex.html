@@ -1,0 +1,71 @@
+<!DOCTYPE html >
+<html>
+
+<head>
+  <title>d3.js sample</title>
+  <meta charset="utf-8">
+
+  <style>
+    div.bar {
+      display: inline-block;
+      width: 20px;
+      height: 75px;
+      background-color: skyblue;
+      margin-right: 4px;
+    }
+
+
+  </style>
+</head>
+<!-- 비교를 위한 그래프, 그래프의 다른 형태 표현 -->
+
+<body>
+
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+  <script type="text/javascript">
+
+  var dataset = [5,19,15,20,25,11,8];
+  var dataset2 = [
+    [
+      { x : 0, y : 5},
+      { x : 1, y : 6},
+      { x : 2, y : 2},
+      { x : 3, y : 4}
+    ],
+    [
+      { x : 0, y : 2},
+      { x : 1, y : 8},
+      { x : 2, y : 6},
+      { x : 3, y : 4}
+    ],
+    [
+      { x : 0, y : 7},
+      { x : 1, y : 3},
+      { x : 2, y : 4},
+      { x : 3, y : 10}
+    ],
+    [
+      { x : 0, y : 4},
+      { x : 1, y : 3},
+      { x : 2, y : 5},
+      { x : 3, y : 7}
+    ]
+  ];
+
+  </script>
+  <!--bar_chart는 데이터 순서대로 표시, pie_chart는 크기순으로 표시 -->
+
+  <!-- 가장 기본 svg 미사용-->
+  <script src="bar_chart1.js"></script><hr>
+  <!-- svg 사용. 같은 데이터를 다른 형식으로 표현 -->
+  <script src="bar_chart2.js"></script>
+  <script src="pie_chart.js"></script><hr>
+  <!-- svg 사용, 여러 값을 비교할 수 있도록 표현-->
+  <script src="stack_layout.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>react test</title>
+
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+
+    <style>
+
+    .route_info{width: 99%; height: 40px;  margin:0 auto; line-height: 40px;background-color: #ccc; border-bottom: 1px solid black;}
+
+    .route_info:hover{background-color: #ddd; cursor:pointer;}
+
+    </style>
+
+  </head>
+  <body>
+    <div id="exam"></div>
+
+  <script type="text/babel">
+
+  //기존에 사용하던 임시 데이터 생성 코드
+    var temp;
+    var today = new Date();
+    var carState = ["drive","wait","stop","trouble"];
+
+    function carLocation(){
+      var lat;
+      var lng;
+      var angle;
+      var reported_at;
+      var state;
+      var velocity;
+    }
+    function randomNumber(num1, num2){
+      var result = Math.floor(Math.random() * num1 + num2 );
+      return result;
+    }
+    function addLocation(){
+      var locations = [];
+
+      for(var i = 0;i<5;i++){
+        locations[i] = new carLocation();
+        locations[i].lat = 37 + "." +  randomNumber((478154 - 619711 + 1), 619711);
+        locations[i].lng = 126 + "." + randomNumber((895000 - 999999 + 1), 999999);
+        locations[i].angle = randomNumber(360, 0);
+        locations[i].reported_at = today.getFullYear() +"."+(today.getMonth()+1)+"."+today.getDate();
+        locations[i].state = carState[randomNumber(4, 0)];
+        locations[i].velocity = randomNumber(150, 0);
+      }
+      return locations;
+    }
+
+
+    // 데이터를 일정 주기로 업데이트.
+    setInterval(function(){
+      temp = addLocation();
+
+      // 데이터의 길이만큼 반복해서 필요한 컴포넌트를 만들고 map에 추가해서 리스트 생성
+      var TestDiv = React.createClass({
+        render: function(){
+          var datas = this.props.data.map(function(comment,index){
+            return <Comment reported_at={comment.reported_at} state={comment.state} key={index}>{comment.text}</Comment>
+          }.bind(this));
+          return (
+            <div>
+              {datas}
+            </div>
+          );
+        }
+      });
+
+      // 사용될 template
+      var Comment = React.createClass({
+        render: function(){
+          return (
+            <div className="route_info"> 입력 시간 : {this.props.reported_at}, 상태 : {this.props.state} </div>
+          );
+        }
+      });
+
+      // 만들어진 리스트 삽입.
+      ReactDOM.render(
+        <TestDiv data={temp}/>,
+        document.getElementById('exam')
+      );
+
+    }, 11000);
+  </script>
+  </body>
+</html>

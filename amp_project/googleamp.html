@@ -1,0 +1,126 @@
+<!doctype html>
+<html amp lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>google amp test</title>
+    <link rel="canonical" href="http://example.com/original-article.html" >
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style>body {opacity: 0}</style>
+    <noscript>
+      <style>body {opacity: 1}</style>
+    </noscript>
+
+    <!-- 사용할 것들만 불러들인후 사용하면 된다. -->
+    <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+     <script async custom-element="amp-image-lightbox" src="https://cdn.ampproject.org/v0/amp-image-lightbox-0.1.js"></script>
+
+     <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <style amp-custom>
+      body {
+        background-color: skyblue;
+      }
+      amp-img {
+        background-color: gray;
+        border: 1px solid black;
+      }
+      section[expanded] h4.toggle:after {
+        font-weight: bold;
+        content: 'Hide';
+      }
+      section:not([expanded]) h4.toggle:after {
+        content: 'Show';
+      }
+      .blue-box, .red-box, .green-box {
+        width: 50%;
+        height: 280px;
+      }
+      .blue-box {
+        background: blue;
+      }
+      .green-box {
+        background: green;
+      }
+      .red-box {
+        background: red;
+      }
+    </style>
+  </head>
+
+  <body>
+<!-- accordion -->
+    <amp-accordion>
+
+<!-- 이미지 -->
+    <section expanded>
+      <h4>image</h4>
+      <amp-img src="http://searchengineland.com/figz/wp-content/seloads/2015/12/google-amp-fast-speed-travel-ss-1920-800x450.jpg" alt="Welcome" height="300" width="600"></amp-img>
+    </section>
+
+<!-- image-lightbox -->
+    <section>
+      <h4>image_lightbox</h4>
+      <figure>
+        <amp-image-lightbox id="lightbox1" layout="nodisplay"></amp-image-lightbox>
+        <amp-img on="tap:lightbox1"
+          role="button"
+          tabindex="0"
+          src="http://the-gear-resource.s3.amazonaws.com/images/20151007/20151007233414555171.jpg"
+          width="300"
+          height="246"></amp-img>
+        <figcaption>이미지 클릭</figcaption>
+      </figure>
+    </section>
+
+
+<!-- slide 왠진 몰라도 선언한 사이즈 보다 크게 나와서 슬라이드 버튼이 아래 있다.-->
+    <section>
+      <h4>slide</h4>
+      <amp-carousel width="400"
+          height="300"
+          layout="responsive"
+          type="slides">
+        <div>
+          <div class="blue-box"></div>
+          This is a blue box.
+        </div>
+        <div>
+          <div class="red-box"></div>
+          This is a red box.
+        </div>
+        <div>
+          <div class="green-box"></div>
+          This is a green box.
+        </div>
+      </amp-carousel>
+    </section>
+
+<!-- audio -->
+    <section>
+      <h4>audio</h4>
+      <amp-audio width="auto"
+        height="50"
+        src="https://ia801402.us.archive.org/16/items/EDIS-SRP-0197-06/EDIS-SRP-0197-06.mp3">
+        <section fallback>
+          <p>Your browser doesn’t support HTML5 audio</p>
+        </section>
+      </amp-audio>
+    </section>
+
+<!-- youtube 영상. 주소를 다 쓸것 없이 id 번호만 입력하면 된다 . -->
+    <section>
+      <h4>video_youtube</h4>
+      <amp-youtube width="480"
+        height="270"
+        layout=responsive
+        data-videoid="lBTCB7yLs8Y">
+      </amp-youtube>
+    </section>
+    </amp-accordion>
+  </body>
+
+</html>

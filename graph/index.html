@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title>chart example</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+    <!-- <script src="//d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+<script src="https://d3js.org/d3-time-format.v2.min.js"></script> -->
+    <!-- <script src="js/graph_d3.js"></script> -->
+
+    <script src="js/createTempData.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/raphael-2.1.4.min.js"></script>
+    <script src="js/justgage.js"></script>
+    <script src="js/graph_GC.js"></script>
+
+    <script src="js/showState.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"  href="css/index.css" />
+
+  </head>
+  <body>
+    <div id = "wrap">
+
+      <div id = "graphGC">
+        <div id = "targetGC" class="col-md-8">
+        </div>
+        <div id="ctrlWrapGC" class="col-md-2">
+          <div id = "grade"></div>
+          <div id = "controller">
+            <div id="radioList">
+              <input type="radio" name="timeGC" value="1" checked/>1분
+              <input type="radio" name="timeGC" value="15" />15분
+              <input type="radio" name="timeGC" value="60" />1시간
+            </div>
+            <div id="checkList">
+              <input type="checkbox" name="selectGC" value="a" checked /> a
+              <input type="checkbox" name="selectGC" value="b" checked/> b
+              <input type="checkbox" name="selectGC" value="c"  checked/> c
+              <input type="checkbox" name="selectGC" value="d"  checked /> d
+              <input type="checkbox" name="selectGC" value="e"  checked /> e
+            </div>
+          </div>
+          <div id = "state"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+
+
+</html>

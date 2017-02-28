@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>aws s3 file upload exam</title>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <p>
+        fileupload
+      </p>
+
+      <input type = "file" id = "selectFile" name="filename[]" multiple/>
+      <input type = "button" value = "upload" id="uploadBtn" />
+      <p id = "uploadResult"></p>
+    </div>
+
+    <script>
+    AWS.config.update({
+      accessKeyId: "",
+      secretAccessKey: "+D3O6kPnEy9ErHClR+E"
+    });
+
+    var bucket = new AWS.S3({
+      region: '',
+      params: {
+        Bucket: ''
+      }
+    });
+
+    var selectFile = document.getElementById('selectFile');
+    var button = document.getElementById('uploadBtn');
+
+    button.addEventListener('click',function(){
+      var file = selectFile.files[0];
+      if(file){
+        var params = {
+          Key: 'img-file/'+file.name, // 경로
+          ContentType: file.type, // 파일 타입
+          Body: file, // 파일 본문
+          ACL: 'public-read' // 접근 권한
+        };
+      }
+      console.log(params);
+      // 파일 업로드
+      // bucket.putObject(params, function (err, data) {
+      //   if(err){
+      //     console.log(err);
+      //   }else{
+      //     console.log("업로드 성공");
+      //   }
+      // });
+    });
+
+    </script>
+
+  </body>
+</html>

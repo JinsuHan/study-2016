@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title> angular.js sample </title>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+
+  </head>
+
+  <body ng-controller="examCtrl">
+    <h1>{{appName}}</h1>
+    <p>목록 겟수 <strong>{{dataList.length}}</strong>[<a ng-click="achieve()">목록 삭제</a>] </p>
+
+    <ul >
+      <li ng-repeat="app in dataList">
+        <input type="checkbox" ng-model="app.check">{{app.content}}
+      </li>
+    </ul>
+
+    <form name="addItemForm"> <!--  action="" -->
+      <div>
+        <label for="itemText">입력창</label>
+        <input type="text" name="itemText" placeholder="입력" ng-model="newContent">
+        <button type="submit" ng-click="addNewItem(newContent)">추가</button>
+      </div>
+    </form>
+
+    <hr>
+    <div>
+      <label for="item01">아이템 01, </label><label>가격 :100</label>
+      <input type="text" name="item01" placeholder="수량" ng-model="itemNum01" ng-change="compute(itemNum01,itemNum02,itemNum03)">
+    </div>
+    <div>
+      <label for="item02">아이템 02, </label><label>가격 :200</label>
+      <input type="text" name="item02" placeholder="수량" ng-model="itemNum02" ng-change="compute(itemNum01,itemNum02,itemNum03)">
+    </div>
+    <div>
+      <label for="item03">아이템 03, </label><label>가격 :300</label>
+      <input type="text" name="item03" placeholder="수량" ng-model="itemNum03" ng-change="compute(itemNum01,itemNum02,itemNum03)">
+    </div>
+    <br>
+    <div>
+      <label>합계</label>
+      <input type="text" name="result" ng-model="itemResult">
+    </div>
+
+    <hr>
+    선택: <input type="checkbox" ng-model="checked" ng-init="checked=false" />
+    <br/>
+    체크 하면 다음으로 진행됩니다.
+    <button ng-if="checked">다음</button>
+
+
+  </body>
+
+  <script>
+
+    var dataList = [
+      {check:true,content:"임시"}
+    ];
+
+    var app = angular.module("app",[]);
+    app.controller("examCtrl", function($scope){
+      $scope.appName = 'Angular Example';
+      $scope.dataList = dataList;
+
+      $scope.addNewItem = function(newContent){
+        dataList.push({check:true, content:newContent});
+        $scope.newContent = '';
+      }
+
+      $scope.achieve = function(){
+        for(var i = $scope.dataList.length - 1; i >= 0 ; i--){
+          if($scope.dataList[i].check){
+            $scope.dataList.splice(i, 1);
+          }
+        }
+      }
+
+      $scope.compute = function(itemNum01,itemNum02,itemNum03){
+        var result = 0;
+
+        if(itemNum01 == null || isNaN(itemNum01)) itemNum01 = 0;
+        if(itemNum02 == null || isNaN(itemNum02)) itemNum02 = 0;
+        if(itemNum03 == null || isNaN(itemNum03)) itemNum03 = 0;
+
+        result = (itemNum01*100)+(itemNum02*200)+(itemNum03*300)
+        $scope.itemResult = result;
+      }
+
+    });
+
+
+    function examCtrl($scope){
+      console.log("abc");
+    }
+  </script>
+</html>

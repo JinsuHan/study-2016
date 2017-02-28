@@ -1,0 +1,19 @@
+html, body, #wrap{width: 100%; height: 100%; margin: 0px;}
+
+#graphD3,
+#graphGC{height: 100%;  }
+#targetD3,
+#targetGC{ height: 100%;  }
+#ctrlWrapD3,
+#ctrlWrapGC{ height: 100%;}
+#grade,
+#state,
+#controller{margin: 10px;}
+
+#countDown{font-size: 45px; height: 55px; line-height: 55px;}
+
+label,
+p{margin: 0px;}
+hr{margin: 10px;}
+
+svg{width: 100%; height: 100%;}

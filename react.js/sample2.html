@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>react test</title>
+
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+
+    <style>
+
+    .route_info{width: 99%; height: 40px;  margin:0 auto; line-height: 40px;background-color: #ccc; border-bottom: 1px solid black;}
+
+    .route_info:hover{background-color: #ddd; cursor:pointer;}
+
+    </style>
+
+  </head>
+  <body>
+    <div id="exam"></div>
+
+  <script type="text/babel">
+
+  //기존에 사용하던 임시 데이터 생성 코드
+    var temp;
+    var today = new Date();
+    var carState = ["drive","wait","stop","trouble"];
+
+    function carLocation(){
+      var lat;
+      var lng;
+      var angle;
+      var reported_at;
+      var state;
+      var velocity;
+    }
+    function randomNumber(num1, num2){
+      var result = Math.floor(Math.random() * num1 + num2 );
+      return result;
+    }
+    function addLocation(){
+      var locations = [];
+
+      for(var i = 0;i<5;i++){
+        locations[i] = new carLocation();
+        locations[i].lat = 37 + "." +  randomNumber((478154 - 619711 + 1), 619711);
+        locations[i].lng = 126 + "." + randomNumber((895000 - 999999 + 1), 999999);
+        locations[i].angle = randomNumber(360, 0);
+        locations[i].reported_at = today.getFullYear() +"."+(today.getMonth()+1)+"."+today.getDate();
+        locations[i].state = carState[randomNumber(4, 0)];
+        locations[i].velocity = randomNumber(150, 0);
+      }
+      return locations;
+    }
+
+    // 데이터를 일정 주기로 가져온다.
+    setInterval(function(){
+      temp = addLocation();
+
+      //변경 사항이 있는 부분만 다시 렌더링 한다.
+      //그러므로 안의 텍스트필드의 내용이 업데이트시 변화가 없다.
+      ReactDOM.render(
+        <div className="content-list">
+          <div className="route_info">1. 입력시간 : {temp[0].reported_at} 상태 : {temp[0].state} </div>
+          <div className="route_info">2. 입력시간 : {temp[1].reported_at} 상태 : {temp[1].state}</div>
+          <div className="route_info">3. 입력시간 : {temp[2].reported_at} 상태 : {temp[2].state}</div>
+          <div className="route_info">4. 입력시간 : {temp[3].reported_at} 상태 : {temp[3].state}</div>
+          <div className="route_info">5. 입력시간 : {temp[4].reported_at} 상태 : {temp[4].state}</div>
+          <div className="route_info"><input type="text" /></div>
+        </div>,
+        document.getElementById('exam')
+      );
+    }, 1000);
+  </script>
+  </body>
+</html>

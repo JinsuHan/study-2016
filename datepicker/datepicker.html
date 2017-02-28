@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>datapicker</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+
+
+    <!-- datepicker 1 -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- datepicker2 -->
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
+
+    <!-- datepicker3 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js"></script>
+    <style>
+      .list{height: 100px;line-height: 100px;margin-left: 50px;}
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="list">jquery-ui
+        <input type="text" id="datepicker1"/>
+https://jqueryui.com/datepicker/
+      </div>
+      <div class="list">datetimepicker
+        <input id="datepicker2" type="text" >
+https://github.com/xdan/datetimepicker
+      </div>
+
+      <!-- <div class="list">getuikit-datepicker
+        <input id="datepicker3" type="text" >
+https://getuikit.com/docs/datepicker.html
+      </div> -->
+
+    </div>
+
+<script>
+
+$(function() {
+
+  var params = {};
+  window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+  var defaultDate = params.date.substring(0,4)+"-"+params.date.substring(4,6)+"-"+params.date.substring(6,8);
+
+  $("#datepicker1").val(defaultDate);
+  $( "#datepicker1" ).datepicker({
+    dateFormat: 'yy-mm-dd',
+	closeText: "닫기",
+	prevText: "이전달",
+	nextText: "다음달",
+	currentText: "오늘",
+	monthNames: [ "1월","2월","3월","4월","5월","6월",
+	"7월","8월","9월","10월","11월","12월" ],
+	monthNamesShort: [ "1월","2월","3월","4월","5월","6월",
+	"7월","8월","9월","10월","11월","12월" ],
+	dayNames: [ "일요일","월요일","화요일","수요일","목요일","금요일","토요일" ],
+	dayNamesShort: [ "일","월","화","수","목","금","토" ],
+	dayNamesMin: [ "일","월","화","수","목","금","토" ],
+	weekHeader: "주",
+	firstDay: 0,
+	isRTL: false,
+	showMonthAfterYear: true,
+	yearSuffix: "년"
+  });
+
+
+  $("#datepicker2").val(defaultDate);
+  $('#datepicker2').datetimepicker({
+    timepicker:false,
+    format: 'Y-m-d'
+  },$.datetimepicker.setLocale('ko'));
+
+
+
+});
+
+</script>
+  </body>
+</html>

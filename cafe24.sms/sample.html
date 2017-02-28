@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>sms test</title>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" ></script>
+    <link href="/css/sms.css" rel="stylesheet" type="text/css">
+
+  </head>
+  <body>
+
+    <div id = "call" class = "divForm">
+      <input type="text" id="number_call" />
+      <input type="button" id="ajax_call" value="인증번호 받기" /><br>
+      <label id="result_call" class="labelStyle"></label>
+    </div>
+
+    <div id = "confirm" class = "divForm">
+      <input type="text" id="number_confirm" />
+      <input type="button" id="ajax_confirm" value="인증번호 확인" /><br>
+      <label id="count_confirm" class="labelStyle"></label><br>
+      <label id="result_confirm" class="labelStyle"></label>
+    </div>
+    <div id = "result" class = "divForm">
+      <label id="result_result" class="labelStyle"></label>
+    </div>
+
+    <script src="/js/sms.js"></script>
+  </body>
+</html>
